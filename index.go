@@ -20,7 +20,7 @@ func main() {
 	}
 
 	// Sender data.
-	from := "ohmystreamer@gmail.com"
+	from := os.Getenv("EMAIL")
 	password := os.Getenv("EMAIL_PASSWORD")
 
 	// Receiver email address.
