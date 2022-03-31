@@ -6,11 +6,11 @@ import (
 	"net/smtp"
 	"os"
 
+	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/joho/godotenv"
 )
 
-func main() {
-
+func HandleRequest() {
 	// load .env file from given path
 	// we keep it empty it will load .env from current directory
 	err := godotenv.Load(".env")
@@ -46,4 +46,8 @@ func main() {
 		return
 	}
 	fmt.Printf("Email successfully sent to %s", to[0])
+}
+
+func main() {
+	lambda.Start(HandleRequest)
 }
