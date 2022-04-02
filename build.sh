@@ -2,4 +2,5 @@
 
 # Script for building the go zip file for AWS
 
-GOOS=linux GOARCH=amd64 go build -o main main.go zip main.zip main
+GOARCH=amd64 GOOS=linux go build main.go
+zip main.zip main 
