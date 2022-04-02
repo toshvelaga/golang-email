@@ -1,20 +1,33 @@
 package main
 
+// these are the packages we are importing
+// if you import it you gotta use it
 import (
 	"fmt"
+	"log"
 	"net/smtp"
 	"os"
 
-	"github.com/aws/aws-lambda-go/lambda"
+	"github.com/joho/godotenv"
 )
 
-func HandleRequest() {
+func main() {
+
+	// load .env file from given path
+	// we keep it empty it will load .env from current directory
+	err := godotenv.Load(".env")
+
+	if err != nil {
+		log.Fatalf("Error loading .env file")
+	}
 
 	// Sender data.
+	// Get these env variables from your .env file
 	from := os.Getenv("EMAIL")
 	password := os.Getenv("EMAIL_PASSWORD")
 
 	// Receiver email address.
+	// replace my email address with yours unless if you want to send me an email :)
 	to := []string{
 		"toshvelaga@gmail.com",
 	}
@@ -36,10 +49,6 @@ func HandleRequest() {
 		fmt.Println(emailErr)
 		return
 	}
+
 	fmt.Printf("Email successfully sent to %s", to[0])
-
-}
-
-func main() {
-	lambda.Start(HandleRequest)
 }
